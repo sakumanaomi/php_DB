@@ -2,23 +2,50 @@
 // var_dump($_POST);
 // exit();
 
-if(
-  !isset($_POST['hairVolume[]'])|| $_POST['hairVolume[]']==''||
-  !isset($_POST['hairQuality[]'])|| $_POST['hairQuality[]']==''||
-  !isset($_POST['hairColor[]'])|| $_POST['hairColor[]']==''||
-  !isset($_POST['eyeColor[]'])|| $_POST['eyeColor[]']==''||
-  !isset($_POST['skinColor[]'])|| $_POST['skinColor[]']==''||
-  !isset($_POST['suntan[]'])|| $_POST['suntan[]']==''
-){
-  exit('データが足りません');
+
+if(isset($_POST['hairVolume'])) {
+    $hairVolume = $_POST['hairVolume'];
+    echo '髪の量は：' . $hairVolume . '<br>';
+} else {
+    echo '選択されていません。<br>';
+}
+if(isset($_POST['hairQuality'])) {
+    $hairQuality = $_POST['hairQuality'];
+    echo '髪質は：' . $hairQuality . '<br>';
+} else {
+    echo '選択されていません。<br>';
+}
+if(isset($_POST['hairColor'])) {
+    $hairColor = $_POST['hairColor'];
+    echo '髪の色は：' . $hairColor . '<br>';
+} else {
+    echo '選択されていません。<br>';
+}
+if(isset($_POST['eyeColor'])) {
+    $eyeColor = $_POST['eyeColor'];
+    echo '瞳の色は：' . $eyeColor . '<br>';
+} else {
+    echo '選択されていません。<br>';
+}
+if(isset($_POST['skinColor'])) {
+    $skinColor = $_POST['skinColor'];
+    echo '肌の色は：' . $skinColor . '<br>';
+} else {
+    echo '選択されていません。<br>';
+}
+if(isset($_POST['suntan'])) {
+    $suntan = $_POST['suntan'];
+    echo '日焼けすると：' . $suntan . '<br>';
+} else {
+    echo '選択されていません。<br>';
 }
 
-$hairVolume[] = $_POST['hairVolume[]'];
-$hairQuality[] = $_POST['hairQuality[]'];
-$hairColor[] = $_POST['hairColor[]'];
-$eyeColor[] = $_POST['eyeColor[]'];
-$skinColor[] = $_POST['skinColor[]'];
-$suntan[] = $_POST['suntan[]'];
+$hairVolume = $_POST['hairVolume'];
+$hairQuality = $_POST['hairQuality'];
+$hairColor = $_POST['hairColor'];
+$eyeColor = $_POST['eyeColor'];
+$skinColor = $_POST['skinColor'];
+$suntan = $_POST['suntan'];
 
 // DB接続
 // 各種項目設定
@@ -37,7 +64,7 @@ try {
 // 「dbError:...」が表示されたらdb接続でエラーが発生していることがわかる．
 
 // SQL作成&実行
-$sql = 'INSERT INTO personalColor_table(id,hairVolume,hairQuality,hairColor,eyeColor,skinColor,suntan,created_at) VALUES(NULL, :todo, :deadline, now())';
+$sql = 'INSERT INTO personalColor_table(id,hairVolume,hairQuality,hairColor,eyeColor,skinColor,suntan,created_at) VALUES(NULL, :hairVolume, :hairQuality, :hairColor, :eyeColor, :skinColor, :suntan, now())';
 
 $stmt = $pdo->prepare($sql);
 
